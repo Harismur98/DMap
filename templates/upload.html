@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+  
+<html>
+  
+<head>
+    <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css"
+        rel="stylesheet" type="text/css" />
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <meta charset=utf-8 />
+  
+    <script src="{{ url_for('static', filename='upload.js') }}"></script>
+  
+    <style>
+        
+
+body {
+  margin: 40px;
+}
+
+.wrapper {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 500px 500px 440px;
+    background-color: #fff;
+    color: #444;
+  }
+
+  .box {
+    background-color: #444;
+    color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 150%;
+
+  }
+
+  .a {
+    grid-column: 1 / 3;
+    grid-row: 1;
+  }
+  .d {
+    grid-column: 3 ;
+    grid-row: 1 / 3;
+  }
+  .c {
+    grid-column: 1 ;
+    grid-row: 2 ;
+  }
+  .b {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  p{
+    font-size: 80%;
+  }
+
+
+    </style>
+</head>
+  
+<body>
+    <h1>Dengue Analysis Using K-means Clustering Algorithm</h1>
+    
+    <form action="http://127.0.0.1:5000/result" method="POST" enctype="multipart/form-data">
+
+    <div class="wrapper">
+      <div class="box a"><h2>About This Project</h2>
+      <p>
+        The aim of this project is to build a system to cluster the dengue data base on the number of infected and outbreak period. 
+        This system will use K-means as it main algorithm.
+        User need to confirm all column in the dataset is exist so the system will work properly.
+      </p>
+      </div>
+      <div class="box b">Dengue <br>
+        <p>
+          Dengue is a mosquito-borne viral disease that has rapidly spread in all regions of WHO in recent years. 
+          Dengue virus is transmitted by female mosquitoes mainly of the species Aedes aegypti and, to a lesser extent, Ae. albopictus. 
+          These mosquitoes are also vectors of chikungunya, yellow fever and Zika viruses. 
+          Dengue is widespread throughout the tropics, with local variations in risk influenced by rainfall, temperature, relative humidity and unplanned rapid urbanization.
+        </p>
+      </div>
+      <div class="box c">K-Means
+        <br>
+        <p>
+          K-means clustering is a method of vector quantization, originally from signal processing, that aims to partition n observations into k clusters in which each observation belongs to the cluster with the nearest mean (cluster centers or cluster centroid), serving as a prototype of the cluster. 
+          This results in a partitioning of the data space into Voronoi cells. k-means clustering minimizes within-cluster variances (squared Euclidean distances), but not regular Euclidean distances, which would be the more difficult Weber problem: the mean optimizes squared errors, whereas only the geometric median minimizes Euclidean distances.
+        </p>
+      </div>
+      <div class="box d">CSV  Example
+        <br>
+        <p style="font-size: 17px;">The dataset need to have 5 of this column:<br></p>
+        <p style="font-size: 15px;">
+        1.Negeri<br>
+        2.Daerah<br>
+        3.Lokaliti<br>
+        4.Jumlah Kes Terkumpul<br>
+        5.Tempoh Wabak Berlaku (Hari)<br>
+        6.Latitude(optional)<br>
+        7.Longitude(optional)<br>
+        
+        <p style="font-size: 17px;">Does your dataset contain Latitude and Longitude column?</p> 
+        <select name="has_coordinate" >
+          <option value="0">Yes</option>
+          <option value="1">No</option>
+        </select><br>
+        <p style="font-size: 17px;">Choose number of cluster</p>
+        <select name="k" >
+          <option value=2>2</option>
+          <option value=3>3</option>
+          <option value=4>4</option>
+          <option value=5>5</option>
+        </select> <br><br><br><br><br>
+       <input type='file' name='file' onchange="readURL(this);" placeholder="Choose File"/>
+        <button type="submit">Submit </button> <br>
+        <p style="font-size: 13px; color: red;">!!Note if you dont has coordinate it will takes times to process</p>      
+      </div>   
+    </form>
+    </div>
+</body>
+  
+</html>

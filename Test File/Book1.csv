@@ -1,0 +1,16 @@
+﻿,Unnamed: 0,Tahun,Minggu,Negeri,Daerah,Lokaliti,Jumlah Kes Terkumpul,Tempoh Wabak Berlaku (Hari),cluster,cluster_name,address,location,point,latitude,longitude,altitude
+0,0,2015,1,Selangor,Petaling,Du Ss 22 ( 2),111,204,1,teruk,Du Ss 22 ( 2) Petaling Selangor,"Jalan SS 1/22, SS 1, Sungai Way, Petaling Jaya, Petaling, Selangor, 47300, Malaysia","(3.0994093, 101.6201135, 0.0)",3.0994093,101.6201135,0
+1,1,2015,1,Selangor,Petaling,"Seksyen 7 (Flat A : 81Ok 1 -
+12, 81Ok 38 - 43)",83,158,1,teruk,"Seksyen 7 (Flat A : 81Ok 1 -
+12, 81Ok 38 - 43) Petaling Selangor",,,,,
+2,2,2015,1,Selangor,Petaling,"Seksyen 7 (Pusat Komersial A : Jln Aa 7/Aa-Ac 7/Ac, T 7/T-Z7/Z)",199,144,1,teruk,"Seksyen 7 (Pusat Komersial A : Jln Aa 7/Aa-Ac 7/Ac, T 7/T-Z7/Z) Petaling Selangor",,,,,
+3,3,2015,1,Selangor,Petaling,Seksyen 7 ( Flat B : Blok 13-37),34,131,1,teruk,Seksyen 7 ( Flat B : Blok 13-37) Petaling Selangor,,,,,
+4,4,2015,1,Selangor,Petaling,Kd Pju 5 Seksyen 6,40,128,1,teruk,Kd Pju 5 Seksyen 6 Petaling Selangor,,,,,
+5,5,2015,1,Selangor,Petaling,"Jalan 3/A-R Seksyen 3
+8Andar Sri Putra",65,122,1,teruk,"Jalan 3/A-R Seksyen 3
+8Andar Sri Putra Petaling Selangor",,,,,
+6,6,2015,1,Selangor,Hulu Langat,Bl Pju 10 Apt Permai,36,119,1,teruk,Bl Pju 10 Apt Permai Hulu Langat Selangor,,,,,
+7,7,2015,1,Selangor,Petaling,Usj 2/5,32,119,1,teruk,Usj 2/5 Petaling Selangor,"USJ, Lebuhraya Utaraâ€“Selatan Hubungan Tengah, Putra Bistari, Putra Heights, Subang Jaya, Petaling, Selangor, 47650, Malaysia","(3.0192509, 101.5783816, 0.0)",3.0192509,101.5783816,0
+8,8,2015,1,Selangor,Petaling,"81 Pju 9 Sd 13 Apt Sri
+Meranti 1 : 81Ok A - G",33,118,1,teruk,"81 Pju 9 Sd 13 Apt Sri
+Meranti 1 : 81Ok A - G Petaling Selangor",,,,,

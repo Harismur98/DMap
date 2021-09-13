@@ -1,0 +1,235 @@
+<html>
+  <head>
+    <title>Result</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+        crossorigin="anonymous">
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgkPuBV5PCq1CggJkB_rTPkUXEeNd2sno&callback=initMap"
+    type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <script type="text/javascript">
+    var n = {{k}}
+    locations = {{ coorlist|tojson|safe }}
+    var test = JSON.parse(locations) 
+    n_of_k = {{clus_stat|tojson|safe}}
+    var cstat = JSON.parse(n_of_k)  
+    total = {{ total|tojson|safe }}
+    var total_each_cluster = JSON.parse(total)
+    ns =  {{ negeristat|tojson|safe }}
+    var negerist = JSON.parse(ns)
+    function initMap(){
+        var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 6,
+        center: new google.maps.LatLng(4.1093195, 109.45547499999998),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        var infowindow = new google.maps.InfoWindow();
+
+        var marker, i;
+
+        for (i = 0; i < test.length; i++) {  
+            if (test[i].cluster==='Green Zone'){
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(test[i].lat, test[i].lng),
+                map: map,
+                icon: {
+                    url:"http://maps.google.com/mapfiles/ms/icons/green-dot.png",}
+            });
+            }
+            else if((test[i].cluster==='Blue Zone')){
+              marker = new google.maps.Marker({
+                position: new google.maps.LatLng(test[i].lat, test[i].lng),
+                map: map,
+                icon: {
+                    url:"http://maps.google.com/mapfiles/ms/icons/blue-dot.png",}
+            });
+            }
+            else if((test[i].cluster==='Yellow Zone')){
+              marker = new google.maps.Marker({
+                position: new google.maps.LatLng(test[i].lat, test[i].lng),
+                map: map,
+                icon: {
+                    url:"http://maps.google.com/mapfiles/ms/icons/yellow-dot.png",}
+            });
+            }
+            else if((test[i].cluster=='Purple Zone')){
+              marker = new google.maps.Marker({
+                position: new google.maps.LatLng(test[i].lat, test[i].lng),
+                map: map,
+                icon: {
+                    url:"http://maps.google.com/mapfiles/ms/icons/purple-dot.png",}
+            });
+            }
+            else{
+                marker = new google.maps.Marker({
+                position: new google.maps.LatLng(test[i].lat, test[i].lng),
+                map: map,
+                icon: {
+                    url:"http://maps.google.com/mapfiles/ms/icons/red-dot.png",}
+            });
+            }
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+            infowindow.setContent(test[i].cluster);
+            infowindow.open(map, marker);
+            }
+        })(marker, i));
+        }
+    }
+    </script>
+    <style>
+      body{
+        background-color: #f0f0f0;
+      }
+      table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      th, td {
+        padding: 15px;
+      }
+      </style>
+  </head>
+  <body>
+    
+    <div class="container">
+      <div class="row" style="margin-top: 20px;">
+  	    <h1>Result</h1>
+      </div>  
+      <div class="row">
+        <div class="col">
+            <h5>Chart</h5>
+            <img src={{url}} alt="Chart" >
+        </div>
+      
+        <div class="col">
+          <h5>Description</h5><br><br><br>
+          <table border="1" style="width: 100%;">
+            <tr>
+              <th rowspan="2">Cluster Name </th>
+              <th rowspan="2">Number of point</th>
+              <th colspan="2">Minimum for axis</th>
+              <th colspan="2">Maximum for axis</th>
+              
+            </tr>
+            <tr>
+              <td>Total Case</td>
+              <td>Day</td>
+              <td>Total Case</td>
+              <td>Day</td>
+            </tr>
+            <script>
+              for(let i = 0;i<n;i++){
+                document.write("<tr>")
+                document.write("<td>"+cstat[i].label+"</td>");
+                document.write("<td>"+total_each_cluster[i].clus +"</td>");
+                document.write("<td>"+cstat[i].min_x +"</td>");
+                document.write("<td>"+cstat[i].min_y +"</td>");
+                document.write("<td>"+cstat[i].max_x +"</td>");
+                document.write("<td>"+cstat[i].max_y +"</td>");
+                document.write("</tr>")
+              }
+            </script>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+      <div class="col">
+      <h2>Dengue Location</h2>
+        <div id="map" style="width:100%; height:600px;"></div>
+        </div>
+      <div class="col">
+        <h2>Number zone by state</h2>
+        <table border="1" style="width: 100%;">
+            <script>
+              if (n==2){
+                document.write("<tr>")
+                document.write("<th>State</th>");
+                document.write("<th>Green Zone</th>");
+                document.write("<th>Red Zone</th>");
+                document.write("</tr>");
+                for(let i=0;i<negerist.length;i++){
+                  document.write("<tr>")
+                  if (negerist[i].name != 0){
+                    document.write("<td>"+negerist[i].name+"</td>");
+                    document.write("<td>"+negerist[i].g+"</td>");
+                    document.write("<td>"+negerist[i].r+"</td>");
+                    document.write("</tr>")
+                  }
+                }
+              }
+              else if (n==3){
+                document.write("<tr>")
+                document.write("<th>State</th>");
+                document.write("<th>Green Zone</th>");
+                document.write("<th>Yellow Zone</th>");
+                document.write("<th>Red Zone</th>");
+                document.write("</tr>");
+                for(let i=0;i<negerist.length;i++){
+                  document.write("<tr>")
+                  if (negerist[i].name != 0){
+                    document.write("<td>"+negerist[i].name+"</td>");
+                    document.write("<td>"+negerist[i].g+"</td>");
+                    document.write("<td>"+negerist[i].y+"</td>");
+                    document.write("<td>"+negerist[i].r+"</td>");
+                    document.write("</tr>")
+                  }
+                }
+              }
+              else if (n==4){
+                document.write("<tr>")
+                document.write("<th>State</th>");
+                document.write("<th>Green Zone</th>");
+                document.write("<th>Blue Zone</th>");
+                document.write("<th>Yellow Zone</th>");
+                document.write("<th>Red Zone</th>");
+                document.write("</tr>");
+                for(let i=0;i<negerist.length;i++){
+                  document.write("<tr>")
+                  if (negerist[i].name != 0){
+                    document.write("<td>"+negerist[i].name+"</td>");
+                    document.write("<td>"+negerist[i].g+"</td>");
+                    document.write("<td>"+negerist[i].b+"</td>");
+                    document.write("<td>"+negerist[i].y+"</td>");
+                    document.write("<td>"+negerist[i].r+"</td>");
+                    document.write("</tr>")
+                  }
+                }
+              }
+              else if (n==5){
+                document.write("<tr>")
+                document.write("<th>State</th>");
+                document.write("<th>Green Zone</th>");
+                document.write("<th>Blue Zone</th>");
+                document.write("<th>Yellow Zone</th>");
+                document.write("<th>Purple Zone</th>");
+                document.write("<th>Red Zone</th>");
+                document.write("</tr>");
+                for(let i=0;i<negerist.length;i++){
+                  document.write("<tr>")
+                  if (negerist[i].name != 0){
+                    document.write("<td>"+negerist[i].name+"</td>");
+                    document.write("<td>"+negerist[i].g+"</td>");
+                    document.write("<td>"+negerist[i].b+"</td>");
+                    document.write("<td>"+negerist[i].y+"</td>");
+                    document.write("<td>"+negerist[i].p+"</td>");
+                    document.write("<td>"+negerist[i].r+"</td>");
+                    document.write("</tr>")
+                  }
+                }
+              }        
+          </script>
+        </table>
+      </div>
+      </div>
+    </div>
+    
+  </body>
+</html>
